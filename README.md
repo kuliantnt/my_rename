@@ -1,2 +1,10 @@
 # my_rename
-//todo 工作繁忙，有空再写
+
+批量改名
+
+yaml 文件内容
+```yaml
+path: /data/java
+fileExtensions: .jar
+prefixName: prefix
+```

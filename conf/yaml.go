@@ -17,11 +17,14 @@ type Conf struct {
 }
 
 //GetConf 获取配置文件
-func (conf *Conf) GetConf() *Conf {
-
-	yamlFileURL :=  "conf.yaml"
+func (conf *Conf) GetConf(yamlFileURL string) *Conf {
+	if yamlFileURL != "" {
+		yamlFileURL = "/data/sh/conf.yaml"
+	}
+	log.Debugf("配置文件地址为: %s", yamlFileURL)
 	ex, err := os.Executable()
 	if err != nil {
+		log.Errorf("获取yaml配置文件出错")
 		panic(err)
 	}
 	exPath := filepath.Dir(ex)

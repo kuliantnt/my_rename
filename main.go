@@ -9,14 +9,15 @@ import (
 
 func main() {
 	var c conf.Conf
-	log.Info(c)
 	//配置文件路径
 	ymlPathUrl := ""
-	if len(os.Args) != 0 {
+	if len(os.Args) >= 2 {
 		ymlPathUrl = os.Args[1]
 	}
 	c.GetConf(ymlPathUrl)
+	//打印配置文件内容
+	log.Info(c)
 
-	//替换文
+	//替换文文件名
 	tools.ResetName(c.Path, c.FileExtensions, c.PrefixName)
 }

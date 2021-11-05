@@ -11,9 +11,7 @@ import (
 
 //ResetName 重设文件名
 func ResetName(folder string, fileExtensions string, prefixName string) {
-	log.Infof("后缀名:%s\n"+
-		"文件名： %s\n"+
-		"文件夹目录: %s\n", fileExtensions, prefixName, folder)
+	log.Infof("后缀名: %s, 文件名： %s, 文件夹目录: %s", fileExtensions, prefixName, folder)
 	var cstZone = time.FixedZone("CST", 8*3600)
 	files, _ := ioutil.ReadDir(folder)
 	var count int
@@ -40,5 +38,3 @@ func ResetName(folder string, fileExtensions string, prefixName string) {
 	}
 
 }
-
-

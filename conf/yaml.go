@@ -18,26 +18,29 @@ type Conf struct {
 
 //GetConf 获取配置文件
 func (conf *Conf) GetConf(yamlFileURL string) *Conf {
-	if yamlFileURL != "" {
-		yamlFileURL = "/data/sh/conf.yaml"
-	}
-	log.Debugf("配置文件地址为: %s", yamlFileURL)
+	//获取当前执行文件目录
 	ex, err := os.Executable()
+	//如果不输入参数，读取当前目录下配置文件
+	if yamlFileURL != "" {
+		yamlFileURL = "conf.yaml"
+		//从当前目录读取
+		exPath := filepath.Dir(ex)
+		yamlFileURL = path.Join(exPath, yamlFileURL)
+		log.Debug("配置文件: %s", yamlFileURL)
+	}
+	log.Debugf("GetConf: 配置文件地址为: %s", yamlFileURL)
 	if err != nil {
-		log.Errorf("获取yaml配置文件出错")
+		log.Error("获取yaml配置文件出错: ", err.Error())
 		panic(err)
 	}
-	exPath := filepath.Dir(ex)
-	yamlFileURL = path.Join(exPath, yamlFileURL)
-	//应该是 绝对地址
 	yamlFile, err := ioutil.ReadFile(yamlFileURL)
 	if err != nil {
-		log.Error(err.Error())
+		log.Error("读取文件异常: ", err.Error())
 	}
 	//读取yaml文件
 	err = yaml.Unmarshal(yamlFile, conf)
 	if err != nil {
-		log.Error(err.Error())
+		log.Error("读取yaml异常: ", err.Error())
 	}
 	return conf
 }

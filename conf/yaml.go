@@ -21,7 +21,7 @@ func (conf *Conf) GetConf(yamlFileURL string) *Conf {
 	//获取当前执行文件目录
 	ex, err := os.Executable()
 	//如果不输入参数，读取当前目录下配置文件
-	if yamlFileURL != "" {
+	if yamlFileURL == "" {
 		yamlFileURL = "conf.yaml"
 		//从当前目录读取
 		exPath := filepath.Dir(ex)

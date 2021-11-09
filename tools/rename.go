@@ -34,7 +34,6 @@ func ResetName(folder string, fileExtensions string, prefixName string) {
 				count++
 			}
 		}
-		log.Infof("更改了%d个文件", count)
 	}
-
+	log.Infof("更改了%d个文件", count)
 }

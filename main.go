@@ -7,7 +7,7 @@ import (
 	"rename/tools"
 )
 
-var cliPath = flag.String("path", "/data/sh/", "Input Your yaml path")
+var cliPath = flag.String("path", "/data/sh/conf.yml", "Input Your yaml path")
 
 func main() {
 	flag.Parse()

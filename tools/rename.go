@@ -24,7 +24,7 @@ func ResetName(folder string, fileExtensions string, prefixName string) {
 			editTime := file.ModTime().In(cstZone)
 			editTimeStr := fmt.Sprintf("%d%d%d_%d%d", editTime.Year(), editTime.Month(), editTime.Day(), editTime.Hour(), editTime.Month())
 			newFileName := prefixName + editTimeStr
-			log.Infof("reName %s -> %s", fileName, editTimeStr)
+			log.Infof("reName %s -> %s", fileName, newFileName)
 
 			err := os.Rename(folder+fileName, folder+newFileName)
 			if err != nil {
@@ -34,7 +34,7 @@ func ResetName(folder string, fileExtensions string, prefixName string) {
 				count++
 			}
 		}
-		log.Infof("更改了%s个文件", count)
+		log.Infof("更改了%d个文件", count)
 	}
 
 }

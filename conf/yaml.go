@@ -11,9 +11,12 @@ import (
 
 //Conf 配置文件结构
 type Conf struct {
-	Path           string `yaml:"path"`
+	//目录
+	Path string `yaml:"path"`
+	//文件扩展名
 	FileExtensions string `yaml:"fileExtensions"`
-	PrefixName     string `yaml:"prefixName"`
+	//前缀名
+	PrefixName string `yaml:"prefixName"`
 }
 
 //GetConf 获取配置文件

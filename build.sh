@@ -1,0 +1,1 @@
+set CGO_ENABLE=0

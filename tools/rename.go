@@ -22,7 +22,8 @@ func ResetName(folder string, fileExtensions string, prefixName string) {
 		if flag {
 			fileName := file.Name()
 			editTime := file.ModTime().In(cstZone)
-			editTimeStr := fmt.Sprintf("%d%d%d_%d%d", editTime.Year(), editTime.Month(), editTime.Day(), editTime.Hour(), editTime.Month())
+			editTimeStr := fmt.Sprintf("%04d%02d%02d_%02d%02d",
+				editTime.Year(), editTime.Month(), editTime.Day(), editTime.Hour(), editTime.Month())
 			newFileName := prefixName + editTimeStr
 			log.Infof("reName %s -> %s", fileName, newFileName)
 

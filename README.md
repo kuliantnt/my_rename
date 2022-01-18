@@ -13,6 +13,7 @@
 ```
 
 ## 二、使用方法
+
 ### 1. 编写配置文件
 
 编写配置文件 `conf.yml` 当然可以自己定义`yml`文件
@@ -34,6 +35,3 @@ chmod +x rename
 
 ./rename -path {{ confFile }}
 ```
-
-
-

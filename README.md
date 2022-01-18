@@ -4,7 +4,7 @@
 
 yaml 文件内容
 ```yaml
-path: /data/java
-fileExtensions: .jar
-prefixName: prefix
+path: {{ 执行目录 }}
+fileExtensions: {{ .扩展名 }} //记得前面要加.
+prefixName: {{ 前缀 }}
 ```

@@ -2,9 +2,10 @@ package main
 
 import (
 	"flag"
-	log "github.com/sirupsen/logrus"
 	"rename/conf"
 	"rename/tools"
+
+	log "github.com/sirupsen/logrus"
 )
 
 var cliPath = flag.String("path", "/data/sh/conf.yml", "Input Your yaml path")

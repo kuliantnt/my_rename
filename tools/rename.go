@@ -5,6 +5,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"os"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -17,15 +18,25 @@ func ResetName(folder string, fileExtensions string, prefixName string) {
 	var count int
 	for _, file := range files {
 		//首先不是目录，且后缀名为fileExtensions
-		var flag = !file.IsDir() && strings.HasSuffix(file.Name(), fileExtensions)
+		//flag := !file.IsDir() && (strings.HasSuffix(file.Name(), fileExtensions) || strings.HasPrefix(file.Name(), prefixName))
+		//判断不是目录
+		dirFlag := !file.IsDir()
+		//是否改名, 如果改名了就不执行
+		matchFlag, _ := regexp.MatchString(prefixName+"\\d{8}_\\d{4}"+fileExtensions, file.Name())
+		matchFlag = !matchFlag
+		//是否为prefix开头，后缀名为fileExtensions
+		doFlag := strings.HasPrefix(file.Name(), prefixName) && strings.HasSuffix(file.Name(), fileExtensions)
+		//doFlag := strings.HasPrefix(file.Name(), prefixName)
+
+		flag := dirFlag && matchFlag && doFlag
 		//改文件名
 		if flag {
 			fileName := file.Name()
 			editTime := file.ModTime().In(cstZone)
 			editTimeStr := fmt.Sprintf("%04d%02d%02d_%02d%02d",
 				editTime.Year(), editTime.Month(), editTime.Day(), editTime.Hour(), editTime.Month())
-			newFileName := prefixName + editTimeStr
-			log.Infof("reName %s -> %s", fileName, newFileName)
+			newFileName := prefixName + editTimeStr + fileExtensions
+			log.Infof("ReName %s -> %s", fileName, newFileName)
 
 			err := os.Rename(folder+fileName, folder+newFileName)
 			if err != nil {

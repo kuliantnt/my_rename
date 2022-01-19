@@ -2,23 +2,22 @@ package tools
 
 import (
 	"fmt"
-	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"os"
 	"regexp"
 	"strings"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 //ResetName 重设文件名
 func ResetName(folder string, fileExtensions string, prefixName string) {
-	log.Infof("后缀名: %s, 文件名： %s, 文件夹目录: %s", fileExtensions, prefixName, folder)
+	log.Infof("后缀名: %s, 文件名: %s, 文件夹目录: %s", fileExtensions, prefixName, folder)
 	var cstZone = time.FixedZone("CST", 8*3600)
 	files, _ := ioutil.ReadDir(folder)
 	var count int
 	for _, file := range files {
-		//首先不是目录，且后缀名为fileExtensions
-		//flag := !file.IsDir() && (strings.HasSuffix(file.Name(), fileExtensions) || strings.HasPrefix(file.Name(), prefixName))
 		//判断不是目录
 		dirFlag := !file.IsDir()
 		//是否改名, 如果改名了就不执行
@@ -26,8 +25,7 @@ func ResetName(folder string, fileExtensions string, prefixName string) {
 		matchFlag = !matchFlag
 		//是否为prefix开头，后缀名为fileExtensions
 		doFlag := strings.HasPrefix(file.Name(), prefixName) && strings.HasSuffix(file.Name(), fileExtensions)
-		//doFlag := strings.HasPrefix(file.Name(), prefixName)
-
+		//如果为否，则不改文件名
 		flag := dirFlag && matchFlag && doFlag
 		//改文件名
 		if flag {
